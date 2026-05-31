@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": "minecraft:rail"
+  },
+  "pattern": [
+    " R ",
+    "RRR"
+  ],
+  "result": {
+    "count": 4,
+    "id": "railwaymod:rail_t_intersection"
+  }
+}

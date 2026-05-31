@@ -18,7 +18,13 @@ public class TagGen extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(BlockTags.RAILS).add(Init.RAIL_INTERSECTION_BLOCK.get());
-        tag(BlockTags.PREVENT_MOB_SPAWNING_INSIDE).add(Init.RAIL_INTERSECTION_BLOCK.get());
+        tag(BlockTags.RAILS)
+                .add(Init.RAIL_INTERSECTION_BLOCK.get())
+                .add(Init.RAIL_SPLIT_INTERSECTION_BLOCK.get())
+                .add(Init.RAIL_T_INTERSECTION_BLOCK.get());
+        tag(BlockTags.PREVENT_MOB_SPAWNING_INSIDE)
+                .add(Init.RAIL_INTERSECTION_BLOCK.get())
+                .add(Init.RAIL_INTERSECTION_BLOCK.get())
+                .add(Init.RAIL_T_INTERSECTION_BLOCK.get());
     }
 }

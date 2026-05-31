@@ -18,7 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 public class RailIntersectionBlock extends BaseRailBlock {
-
     public static final MapCodec<RailIntersectionBlock> CODEC = simpleCodec(RailIntersectionBlock::new);
 
     public RailIntersectionBlock(Properties properties) {

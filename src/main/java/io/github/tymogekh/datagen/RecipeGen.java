@@ -29,6 +29,10 @@ public class RecipeGen extends RecipeProvider {
     protected void buildRecipes() {
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.TRANSPORTATION, Init.RAIL_INTERSECTION_ITEM.get(), 5)
                 .define('R', Items.RAIL).pattern(" R ").pattern("RRR").pattern(" R ").unlockedBy("has_rail", has(Items.RAIL)).save(this.output);
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.TRANSPORTATION, Init.RAIL_SPLIT_INTERSECTION_ITEM.get(), 3)
+                .define('R', Items.RAIL).pattern(" R ").pattern("R R").unlockedBy("has_rail", has(Items.RAIL)).save(this.output);
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.TRANSPORTATION, Init.RAIL_T_INTERSECTION_ITEM.get(), 4)
+                .define('R', Items.RAIL).pattern(" R ").pattern("RRR").unlockedBy("has_rail", has(Items.RAIL)).save(this.output);
     }
 
     public static class Runner extends RecipeProvider.Runner {

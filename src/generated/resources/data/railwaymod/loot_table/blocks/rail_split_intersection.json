@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "railwaymod:rail_split_intersection"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "railwaymod:blocks/rail_split_intersection"
+}

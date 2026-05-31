@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "railwaymod:item/rail_split_intersection"
+  }
+}

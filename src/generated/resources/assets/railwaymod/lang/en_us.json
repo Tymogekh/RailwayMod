@@ -1,4 +1,9 @@
 {
   "block.railwaymod.rail_intersection": "Rail Intersection",
-  "item.railwaymod.rail_intersection": "Rail Intersection"
+  "block.railwaymod.rail_split_intersection": "Rail Split Intersection",
+  "block.railwaymod.rail_t_intersection": "Rail T Intersection",
+  "item.railwaymod.rail_intersection": "Rail Intersection",
+  "item.railwaymod.rail_split_intersection": "Rail Split Intersection",
+  "item.railwaymod.rail_t_intersection": "Rail T Intersection",
+  "item_group.railwaymod.creative_tab": "Railway Mod"
 }

@@ -10,5 +10,6 @@ public class RailwayMod {
     public RailwayMod(IEventBus bus) {
         Init.BLOCKS.register(bus);
         Init.ITEMS.register(bus);
+        Init.CREATIVE_TABS.register(bus);
     }
 }
