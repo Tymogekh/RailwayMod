@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,part=inner_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_inn",
+      "y": 90
+    },
+    "facing=east,part=main": {
+      "model": "railwaymod:block/rail_curve_2x",
+      "y": 90
+    },
+    "facing=east,part=outer_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_out",
+      "y": 90
+    },
+    "facing=east,part=upper": {
+      "model": "railwaymod:block/rail_curve_2x_upper",
+      "y": 90
+    },
+    "facing=north,part=inner_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_inn"
+    },
+    "facing=north,part=main": {
+      "model": "railwaymod:block/rail_curve_2x"
+    },
+    "facing=north,part=outer_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_out"
+    },
+    "facing=north,part=upper": {
+      "model": "railwaymod:block/rail_curve_2x_upper"
+    },
+    "facing=south,part=inner_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_inn",
+      "y": 180
+    },
+    "facing=south,part=main": {
+      "model": "railwaymod:block/rail_curve_2x",
+      "y": 180
+    },
+    "facing=south,part=outer_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_out",
+      "y": 180
+    },
+    "facing=south,part=upper": {
+      "model": "railwaymod:block/rail_curve_2x_upper",
+      "y": 180
+    },
+    "facing=west,part=inner_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_inn",
+      "y": 270
+    },
+    "facing=west,part=main": {
+      "model": "railwaymod:block/rail_curve_2x",
+      "y": 270
+    },
+    "facing=west,part=outer_bit": {
+      "model": "railwaymod:block/rail_curve_2x_bit_out",
+      "y": 270
+    },
+    "facing=west,part=upper": {
+      "model": "railwaymod:block/rail_curve_2x_upper",
+      "y": 270
+    }
+  }
+}

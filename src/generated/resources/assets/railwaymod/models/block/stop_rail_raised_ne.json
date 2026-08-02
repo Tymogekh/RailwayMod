@@ -1,0 +1,6 @@
+{
+  "parent": "railwaymod:block/template_rail_raised_ne",
+  "textures": {
+    "rail": "railwaymod:block/stop_rail_raised"
+  }
+}

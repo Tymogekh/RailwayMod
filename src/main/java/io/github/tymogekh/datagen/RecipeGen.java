@@ -10,6 +10,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +34,10 @@ public class RecipeGen extends RecipeProvider {
                 .define('R', Items.RAIL).pattern(" R ").pattern("R R").unlockedBy("has_rail", has(Items.RAIL)).save(this.output);
         ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.TRANSPORTATION, Init.RAIL_T_INTERSECTION_ITEM.get(), 4)
                 .define('R', Items.RAIL).pattern(" R ").pattern("RRR").unlockedBy("has_rail", has(Items.RAIL)).save(this.output);
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.TRANSPORTATION, Init.STOP_RAIL_ITEM.get(), 6)
+                .define('I', Tags.Items.INGOTS_IRON).define('H', Items.HONEY_BLOCK).define('R', Items.REDSTONE).pattern("I I").pattern("IHI").pattern("IRI").unlockedBy("has_honey_block", has(Items.HONEY_BLOCK)).save(this.output);
+        ShapedRecipeBuilder.shaped(this.registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, Init.RAIL_WRENCH.get())
+                .define('I', Items.IRON_INGOT).define('N', Items.IRON_NUGGET).pattern(" N ").pattern(" IN").pattern("I  ").unlockedBy("has_iron", has(Items.IRON_INGOT)).save(this.output);
     }
 
     public static class Runner extends RecipeProvider.Runner {

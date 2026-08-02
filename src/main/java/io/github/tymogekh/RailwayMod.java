@@ -9,6 +9,7 @@ public class RailwayMod {
 
     public RailwayMod(IEventBus bus) {
         Init.BLOCKS.register(bus);
+        Init.DATA_COMPONENT_TYPES.register(bus);
         Init.ITEMS.register(bus);
         Init.CREATIVE_TABS.register(bus);
     }

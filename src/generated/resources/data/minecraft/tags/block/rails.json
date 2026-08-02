@@ -2,6 +2,8 @@
   "values": [
     "railwaymod:rail_intersection",
     "railwaymod:rail_split_intersection",
-    "railwaymod:rail_t_intersection"
+    "railwaymod:rail_t_intersection",
+    "railwaymod:stop_rail",
+    "railwaymod:rail_curve_2x"
   ]
 }

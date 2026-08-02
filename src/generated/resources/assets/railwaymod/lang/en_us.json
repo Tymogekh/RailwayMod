@@ -1,9 +1,13 @@
 {
+  "block.railwaymod.rail_curve_2x": "Rail Curve",
   "block.railwaymod.rail_intersection": "Rail Intersection",
   "block.railwaymod.rail_split_intersection": "Rail Split Intersection",
   "block.railwaymod.rail_t_intersection": "Rail T Intersection",
+  "block.railwaymod.stop_rail": "Stop Rail",
   "item.railwaymod.rail_intersection": "Rail Intersection",
   "item.railwaymod.rail_split_intersection": "Rail Split Intersection",
   "item.railwaymod.rail_t_intersection": "Rail T Intersection",
+  "item.railwaymod.rail_wrench": "Rail Wrench",
+  "item.railwaymod.stop_rail": "Stop Rail",
   "item_group.railwaymod.creative_tab": "Railway Mod"
 }

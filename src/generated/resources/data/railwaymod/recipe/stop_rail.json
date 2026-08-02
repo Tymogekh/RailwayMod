@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "minecraft:honey_block",
+    "I": "#c:ingots/iron",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "I I",
+    "IHI",
+    "IRI"
+  ],
+  "result": {
+    "count": 6,
+    "id": "railwaymod:stop_rail"
+  }
+}
