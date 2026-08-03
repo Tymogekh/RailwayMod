@@ -39,6 +39,11 @@ public class RailCurveBlockX2 extends BaseRailBlock {
     }
 
     @Override
+    protected @NotNull BlockState updateDir(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, boolean first) {
+        return level.getBlockState(pos);
+    }
+
+    @Override
     public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         BlockState state = this.defaultBlockState();
         Direction direction = context.getHorizontalDirection();
