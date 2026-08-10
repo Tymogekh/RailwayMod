@@ -39,8 +39,8 @@ public class RailSplitIntersectionBlock extends BaseRailBlock {
     }
 
     @Override
-    protected @NotNull BlockState updateDir(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, boolean first) {
-        return level.getBlockState(pos);
+    public boolean isValidRailShape(@NotNull RailShape shape) {
+        return false;
     }
 
     @Override

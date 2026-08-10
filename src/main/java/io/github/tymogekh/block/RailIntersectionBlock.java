@@ -6,7 +6,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RailBlock;
@@ -37,8 +36,8 @@ public class RailIntersectionBlock extends BaseRailBlock {
     }
 
     @Override
-    protected @NotNull BlockState updateDir(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, boolean first) {
-        return level.getBlockState(pos);
+    public boolean isValidRailShape(@NotNull RailShape shape) {
+        return false;
     }
 
     @Override
