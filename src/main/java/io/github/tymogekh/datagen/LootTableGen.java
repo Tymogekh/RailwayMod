@@ -1,6 +1,6 @@
 package io.github.tymogekh.datagen;
 
-import io.github.tymogekh.Init;
+import io.github.tymogekh.init.Init;
 import io.github.tymogekh.block.RailCurveBlockX2;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;

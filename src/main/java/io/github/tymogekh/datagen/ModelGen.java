@@ -1,6 +1,6 @@
 package io.github.tymogekh.datagen;
 
-import io.github.tymogekh.Init;
+import io.github.tymogekh.init.Init;
 import io.github.tymogekh.RailwayMod;
 import io.github.tymogekh.block.RailCurveBlockX2;
 import net.minecraft.client.data.models.BlockModelGenerators;

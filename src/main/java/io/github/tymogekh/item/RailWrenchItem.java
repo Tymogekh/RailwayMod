@@ -1,6 +1,6 @@
 package io.github.tymogekh.item;
 
-import io.github.tymogekh.Init;
+import io.github.tymogekh.init.Init;
 import io.github.tymogekh.block.RailCurveBlockX2;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

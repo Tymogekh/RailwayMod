@@ -7,6 +7,7 @@ import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import org.jetbrains.annotations.NotNull;
@@ -26,17 +27,17 @@ public class RailTIntersectionBlock extends RailSplitIntersectionBlock{
 
     @Override
     public @NotNull RailShape getRailDirection(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @Nullable AbstractMinecart cart) {
+        RailShape shape = state.getValue(RailBlock.SHAPE);
         if (cart != null) {
-            Direction cartDirection = cart.getDirection().getClockWise();
             Direction railDirection = state.getValue(HorizontalDirectionalBlock.FACING);
-            if (cartDirection == railDirection.getClockWise() || cartDirection == railDirection.getCounterClockWise()) {
-                if (cartDirection == Direction.NORTH || cartDirection == Direction.SOUTH) {
-                    return RailShape.NORTH_SOUTH;
-                } else if (cartDirection == Direction.WEST || cartDirection == Direction.EAST) {
+            if (isCollisionCourse(state, pos, cart, state.getValue(RailSplitIntersectionBlock.POWERED))) {
+                if (railDirection == Direction.NORTH || railDirection == Direction.SOUTH) {
                     return RailShape.EAST_WEST;
+                } else if (railDirection == Direction.WEST || railDirection == Direction.EAST) {
+                    return RailShape.NORTH_SOUTH;
                 }
             }
         }
-        return super.getRailDirection(state, world, pos, cart);
+        return shape;
     }
 }

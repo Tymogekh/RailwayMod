@@ -1,7 +1,7 @@
 package io.github.tymogekh.block;
 
 import com.mojang.serialization.MapCodec;
-import io.github.tymogekh.Init;
+import io.github.tymogekh.init.Init;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;

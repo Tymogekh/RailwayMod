@@ -1,5 +1,6 @@
 package io.github.tymogekh;
 
+import io.github.tymogekh.init.Init;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 

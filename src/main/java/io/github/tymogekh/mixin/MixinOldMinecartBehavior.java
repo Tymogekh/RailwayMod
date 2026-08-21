@@ -2,7 +2,8 @@ package io.github.tymogekh.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import io.github.tymogekh.Init;
+import io.github.tymogekh.accessor.LastMinecartPosAccessor;
+import io.github.tymogekh.init.Init;
 import io.github.tymogekh.block.StopRailBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -10,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.minecart.MinecartBehavior;
 import net.minecraft.world.entity.vehicle.minecart.OldMinecartBehavior;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -18,9 +20,11 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(OldMinecartBehavior.class)
-public abstract class MixinOldMinecartBehavior extends MinecartBehavior {
+public abstract class MixinOldMinecartBehavior extends MinecartBehavior implements LastMinecartPosAccessor {
     @Unique
     private boolean railwaymod$hasStopped = false;
+    @Unique
+    private BlockPos railwaymod$lastPos = this.minecart.getCurrentBlockPosOrRailBelow();
 
     protected MixinOldMinecartBehavior(AbstractMinecart minecart) {
         super(minecart);
@@ -37,8 +41,22 @@ public abstract class MixinOldMinecartBehavior extends MinecartBehavior {
             this.setDeltaMovement(Vec3.ZERO);
             this.railwaymod$hasStopped = true;
         } else {
-            original.call(instance, level);
             this.railwaymod$hasStopped = false;
+            original.call(instance, level);
         }
+    }
+
+    @WrapOperation(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/minecart/OldMinecartBehavior;level()Lnet/minecraft/world/level/Level;", ordinal = 0))
+    private Level updateLastPos(OldMinecartBehavior instance, Operation<Level> original) {
+        BlockPos pos = this.minecart.getCurrentBlockPosOrRailBelow();
+        if (Math.abs(pos.getX() - this.railwaymod$lastPos.getX()) >= 2 || Math.abs(pos.getY() - this.railwaymod$lastPos.getY()) >= 2 || Math.abs(pos.getZ() - this.railwaymod$lastPos.getZ()) >= 2) {
+            this.railwaymod$lastPos = pos;
+        }
+        return original.call(instance);
+    }
+
+    @Override
+    public BlockPos railwaymod$getLastPos() {
+        return this.railwaymod$lastPos;
     }
 }

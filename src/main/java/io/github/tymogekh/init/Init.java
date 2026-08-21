@@ -1,5 +1,6 @@
-package io.github.tymogekh;
+package io.github.tymogekh.init;
 
+import io.github.tymogekh.RailwayMod;
 import io.github.tymogekh.block.*;
 import io.github.tymogekh.item.RailWrenchItem;
 import net.minecraft.core.BlockPos;

@@ -1,5 +1,6 @@
-package io.github.tymogekh;
+package io.github.tymogekh.event;
 
+import io.github.tymogekh.RailwayMod;
 import io.github.tymogekh.datagen.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
