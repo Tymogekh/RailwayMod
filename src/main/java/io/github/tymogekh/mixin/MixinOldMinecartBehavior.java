@@ -49,7 +49,7 @@ public abstract class MixinOldMinecartBehavior extends MinecartBehavior implemen
     @WrapOperation(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/minecart/OldMinecartBehavior;level()Lnet/minecraft/world/level/Level;", ordinal = 0))
     private Level updateLastPos(OldMinecartBehavior instance, Operation<Level> original) {
         BlockPos pos = this.minecart.getCurrentBlockPosOrRailBelow();
-        if (Math.abs(pos.getX() - this.railwaymod$lastPos.getX()) >= 2 || Math.abs(pos.getY() - this.railwaymod$lastPos.getY()) >= 2 || Math.abs(pos.getZ() - this.railwaymod$lastPos.getZ()) >= 2) {
+        if (this.railwaymod$lastPos.distSqr(pos) > 1.0F) {
             this.railwaymod$lastPos = pos;
         }
         return original.call(instance);

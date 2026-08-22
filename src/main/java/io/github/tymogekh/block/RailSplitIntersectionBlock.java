@@ -2,6 +2,7 @@ package io.github.tymogekh.block;
 
 import com.mojang.serialization.MapCodec;
 import io.github.tymogekh.accessor.LastMinecartPosAccessor;
+import joptsimple.internal.Strings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -21,6 +22,8 @@ import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
+
+import java.util.Locale;
 
 public class RailSplitIntersectionBlock extends BaseRailBlock {
     public static final MapCodec<RailSplitIntersectionBlock> CODEC = simpleCodec(RailSplitIntersectionBlock::new);
@@ -70,9 +73,10 @@ public class RailSplitIntersectionBlock extends BaseRailBlock {
     @Override
     public @NotNull RailShape getRailDirection(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @Nullable AbstractMinecart cart) {
         RailShape shape = state.getValue(RailBlock.SHAPE);
+        Direction railDirection = state.getValue(FACING);
         boolean powered = state.getValue(POWERED);
         if (cart != null && isCollisionCourse(state, pos, cart, powered)) {
-            return powered ? getUnpoweredShape(shape) : getPoweredShape(shape);
+            return getSwitchedShape(shape, railDirection, powered);
         }
         return shape;
     }
@@ -84,44 +88,39 @@ public class RailSplitIntersectionBlock extends BaseRailBlock {
         RailShape shape;
         if (isPowered != shouldPower) {
             if (shouldPower) {
-                shape = getPoweredShape(state.getValue(RailBlock.SHAPE));
                 level.playSound(null, pos, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundSource.BLOCKS, 1.0F, 1.0F);
             } else {
-                shape = getUnpoweredShape(state.getValue(RailBlock.SHAPE));
                 level.playSound(null, pos, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
+            shape = getSwitchedShape(state.getValue(RailBlock.SHAPE), state.getValue(FACING), isPowered);
             level.setBlock(pos, state.setValue(POWERED, shouldPower).setValue(RailBlock.SHAPE, shape), Block.UPDATE_ALL);
         }
     }
 
     protected boolean isCollisionCourse(BlockState state, BlockPos pos, AbstractMinecart cart, boolean powered) {
         MinecartBehavior behavior = cart.getBehavior();
-        Direction direction = state.getValue(HorizontalDirectionalBlock.FACING).getClockWise();
+        Direction target = state.getValue(HorizontalDirectionalBlock.FACING).getClockWise();
         if (behavior instanceof LastMinecartPosAccessor) {
             BlockPos lastCartPos = ((LastMinecartPosAccessor) behavior).railwaymod$getLastPos();
             if (powered) {
-                direction = direction.getOpposite();
+                target = target.getOpposite();
             }
-            return lastCartPos.equals(pos.relative(direction));
+            return lastCartPos.equals(pos.relative(target));
         }
         return false;
     }
 
-    protected static RailShape getPoweredShape(RailShape shape) {
-        return switch (shape) {
-            case NORTH_WEST -> RailShape.NORTH_EAST;
-            case NORTH_EAST -> RailShape.SOUTH_EAST;
-            case SOUTH_EAST -> RailShape.SOUTH_WEST;
-            default -> RailShape.NORTH_WEST;
-        };
-    }
-
-    protected static RailShape getUnpoweredShape(RailShape shape) {
-        return switch (shape) {
-            case NORTH_EAST -> RailShape.NORTH_WEST;
-            case SOUTH_EAST -> RailShape.SOUTH_WEST;
-            case SOUTH_WEST -> RailShape.SOUTH_EAST;
-            default -> RailShape.NORTH_EAST;
-        };
+    protected static RailShape getSwitchedShape(RailShape shape, Direction facing, boolean powered) {
+        String[] exitNames = shape.getSerializedName().split("_");
+        Direction target = facing.getClockWise();
+        if (powered) {
+            target = target.getOpposite();
+        }
+        if (target == Direction.NORTH || target == Direction.SOUTH) {
+            exitNames[0] = target.getSerializedName();
+        } else if (target == Direction.WEST || target == Direction.EAST) {
+            exitNames[1] = target.getSerializedName();
+        }
+        return RailShape.valueOf(Strings.join(exitNames, "_").toUpperCase(Locale.ENGLISH));
     }
 }
