@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
@@ -29,6 +31,7 @@ public class RailSplitIntersectionBlock extends BaseRailBlock {
     public static final MapCodec<RailSplitIntersectionBlock> CODEC = simpleCodec(RailSplitIntersectionBlock::new);
     public static final BooleanProperty POWERED = PoweredRailBlock.POWERED;
     public static final EnumProperty<@NotNull Direction> FACING = HorizontalDirectionalBlock.FACING;
+    private static final VoxelShape SHAPE = Block.column(16.0, 0.0, 2.0);
 
     public RailSplitIntersectionBlock(Properties properties) {
         super(true, properties);
@@ -38,6 +41,11 @@ public class RailSplitIntersectionBlock extends BaseRailBlock {
     @Override
     protected @NotNull MapCodec<? extends BaseRailBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        return SHAPE;
     }
 
     @Override

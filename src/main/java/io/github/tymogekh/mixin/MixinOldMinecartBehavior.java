@@ -24,10 +24,22 @@ public abstract class MixinOldMinecartBehavior extends MinecartBehavior implemen
     @Unique
     private boolean railwaymod$hasStopped = false;
     @Unique
+    private BlockPos railwaymod$currentPos = this.minecart.getCurrentBlockPosOrRailBelow();
+    @Unique
     private BlockPos railwaymod$lastPos = this.minecart.getCurrentBlockPosOrRailBelow();
 
     protected MixinOldMinecartBehavior(AbstractMinecart minecart) {
         super(minecart);
+    }
+
+    @WrapOperation(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/minecart/OldMinecartBehavior;level()Lnet/minecraft/world/level/Level;", ordinal = 0))
+    private Level updateLastPos(OldMinecartBehavior instance, Operation<Level> original) {
+        BlockPos pos = this.minecart.getCurrentBlockPosOrRailBelow();
+        if (!this.railwaymod$currentPos.equals(pos)) {
+            this.railwaymod$lastPos = this.railwaymod$currentPos;
+            this.railwaymod$currentPos = pos;
+        }
+        return original.call(instance);
     }
 
     @WrapOperation(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/minecart/OldMinecartBehavior;moveAlongTrack(Lnet/minecraft/server/level/ServerLevel;)V"))
@@ -44,15 +56,6 @@ public abstract class MixinOldMinecartBehavior extends MinecartBehavior implemen
             this.railwaymod$hasStopped = false;
             original.call(instance, level);
         }
-    }
-
-    @WrapOperation(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/minecart/OldMinecartBehavior;level()Lnet/minecraft/world/level/Level;", ordinal = 0))
-    private Level updateLastPos(OldMinecartBehavior instance, Operation<Level> original) {
-        BlockPos pos = this.minecart.getCurrentBlockPosOrRailBelow();
-        if (this.railwaymod$lastPos.distSqr(pos) > 1.0F) {
-            this.railwaymod$lastPos = pos;
-        }
-        return original.call(instance);
     }
 
     @Override

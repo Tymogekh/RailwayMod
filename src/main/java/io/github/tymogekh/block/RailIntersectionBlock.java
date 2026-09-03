@@ -48,9 +48,10 @@ public class RailIntersectionBlock extends BaseRailBlock {
     @Override
     public @NotNull RailShape getRailDirection(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @Nullable AbstractMinecart cart) {
         if (cart != null) {
-            if (cart.getDirection() == Direction.NORTH || cart.getDirection() == Direction.SOUTH) {
+            Direction cartDirection = cart.getDirection();
+            if (cartDirection == Direction.NORTH || cartDirection == Direction.SOUTH) {
                 return RailShape.EAST_WEST;
-            } else if (cart.getDirection() == Direction.WEST || cart.getDirection() == Direction.EAST) {
+            } else if (cartDirection == Direction.WEST || cartDirection == Direction.EAST) {
                 return RailShape.NORTH_SOUTH;
             }
         }
